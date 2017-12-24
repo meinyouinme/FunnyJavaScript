@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .dynamicImg {
+            width: 75px;
+            height: 75px;
+            background-size: 75px;
+            background-position-x: 0;
+            display: inline-block;
+            margin-right: 40px;
+        }
+    </style>
+</head>
+<body>
+<div style="margin: 100px auto;text-align: center">
+    <div class="dynamicImg" style="background-image: url(./img/1.jpg)"></div>
+    <div class="dynamicImg" style="background-image: url(./img/2.jpg)"></div>
+    <div class="dynamicImg" style="background-image: url(./img/3.jpg)"></div>
+    <div class="dynamicImg" style="background-image: url(./img/4.jpg)"></div>
+    <div class="dynamicImg" style="background-image: url(./img/5.jpg)"></div>
+    <div class="dynamicImg" style="background-image: url(./img/6.jpg)"></div>
+</div>
+<script>
+    function DynamicImg(img) {
+        var i = 0;
+        var timer = null;
+        img.onmouseover = function () {
+            clearInterval(timer)
+            timer = setInterval(function () {
+                if (i >= 58) clearInterval(timer);
+                img.style.backgroundPositionY = -(++i) * 75 + 'px'
+            }, 17)
+        }
+        img.onmouseout = function () {
+            clearInterval(timer)
+            timer = setInterval(function () {
+                if (i <= 0) clearInterval(timer);
+                img.style.backgroundPositionY = -(i--) * 75 + 'px'
+            }, 17)
+        }
+    }
+
+    var dynamicImgs = document.getElementsByClassName('dynamicImg')
+    for (var i = 0, dynamicImg; dynamicImg = dynamicImgs[i++];) {
+        DynamicImg(dynamicImg)
+    }
+</script>
+</body>
+</html>
